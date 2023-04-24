@@ -61,7 +61,7 @@ vim.keymap.set("n", "<leader>gfc", builtin.git_bcommits, {}) -- list git commits
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {}) -- list git branches (use <cr> to checkout) ["gb" for git branch]
 -- vim.keymap.set("n", "<leader>gs", builtin.git_status, {}) -- list current changes per file with diff preview ["gs" for git status]
 
-vim.keymap.set("n", "fb", function()
+vim.keymap.set("n", "<leader>fb", function()
 	telescope.extensions.file_browser.file_browser({
 		path = "%:p:h",
 		cwd = telescope_buffer_dir(),
