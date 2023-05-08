@@ -34,11 +34,11 @@ vim.keymap.set("n", ";f", function()
 		no_ignore = false,
 		hidden = true,
 		previewer = false,
-		layout_config = { height = 30, width = 80 },
+		-- layout_config = { height = 30, width = 80 },
 	})
 end)
 vim.keymap.set("n", ";r", function()
-	builtin.live_grep()
+	builtin.live_grep({})
 end)
 vim.keymap.set("n", ";b", function()
 	builtin.buffers({
@@ -70,6 +70,6 @@ vim.keymap.set("n", "<leader>fb", function()
 		grouped = true,
 		previewer = false,
 		initial_mode = "normal",
-		layout_config = { height = 30, width = 80 },
+		-- layout_config = { height = 30, width = 80 },
 	})
 end)
