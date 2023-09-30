@@ -16,7 +16,7 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -40,7 +40,7 @@ return packer.startup(function(use)
 
 	use("szw/vim-maximizer") -- maximizes and restores current window
 	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
-	use({ "romgrk/barbar.nvim", requires = "nvim-web-devicons" }) -- tab bar plugins
+	-- use({ "romgrk/barbar.nvim", requires = "nvim-web-devicons" }) -- tab bar plugins
 
 	use({ "numToStr/Comment.nvim", requires = "JoosepAlviste/nvim-ts-context-commentstring" })
 
@@ -52,12 +52,17 @@ return packer.startup(function(use)
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
-		branch = "v1.x",
+		branch = "v2.x",
 		requires = {
 			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/mason.nvim" },
-			{ "williamboman/mason-lspconfig.nvim" },
+			{ "neovim/nvim-lspconfig" }, -- Required
+			{ -- Optional
+				"williamboman/mason.nvim",
+				run = function()
+					pcall(vim.cmd, "MasonUpdate")
+				end,
+			},
+			{ "williamboman/mason-lspconfig.nvim" }, -- Optional
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
@@ -67,11 +72,32 @@ return packer.startup(function(use)
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
+			{ "L3MON4D3/LuaSnip" }, -- Required
 		},
 	})
+
+	-- use({
+	-- 	"VonHeikemen/lsp-zero.nvim",
+	-- 	branch = "v1.x",
+	-- 	requires = {
+	-- 		-- LSP Support
+	-- 		{ "neovim/nvim-lspconfig" },
+	-- 		{ "williamboman/mason.nvim" },
+	-- 		{ "williamboman/mason-lspconfig.nvim" },
+	--
+	-- 		-- Autocompletion
+	-- 		{ "hrsh7th/nvim-cmp" },
+	-- 		{ "hrsh7th/cmp-buffer" },
+	-- 		{ "hrsh7th/cmp-path" },
+	-- 		{ "saadparwaiz1/cmp_luasnip" },
+	-- 		{ "hrsh7th/cmp-nvim-lsp" },
+	-- 		{ "hrsh7th/cmp-nvim-lua" },
+	--
+	-- 		-- Snippets
+	-- 		{ "L3MON4D3/LuaSnip" },
+	-- 		{ "rafamadriz/friendly-snippets" },
+	-- 	},
+	-- })
 
 	-- enhanced lsp uis
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)

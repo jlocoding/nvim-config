@@ -9,7 +9,7 @@ if not status then
 end
 
 vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", ";e", ui.toggle_quick_menu)
+vim.keymap.set("n", ";h", ui.toggle_quick_menu)
 
 vim.keymap.set("n", ";1", function()
 	ui.nav_file(1)

@@ -9,6 +9,7 @@ local builtin = require("telescope.builtin")
 local function telescope_buffer_dir()
 	return vim.fn.expand("%:p:h")
 end
+local fb_actions = require("telescope").extensions.file_browser.actions
 
 telescope.setup({
 	defaults = {
@@ -24,6 +25,9 @@ telescope.setup({
 			},
 			n = {
 				["<C-c>"] = actions.close,
+
+				-- File browser remap
+				["-"] = fb_actions.goto_parent_dir,
 			},
 		},
 	},
@@ -61,7 +65,7 @@ vim.keymap.set("n", "<leader>gfc", builtin.git_bcommits, {}) -- list git commits
 vim.keymap.set("n", "<leader>gb", builtin.git_branches, {}) -- list git branches (use <cr> to checkout) ["gb" for git branch]
 -- vim.keymap.set("n", "<leader>gs", builtin.git_status, {}) -- list current changes per file with diff preview ["gs" for git status]
 
-vim.keymap.set("n", "<leader>fb", function()
+vim.keymap.set("n", ";e", function()
 	telescope.extensions.file_browser.file_browser({
 		path = "%:p:h",
 		cwd = telescope_buffer_dir(),
